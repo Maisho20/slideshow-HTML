@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Belajar Javascript</title>
+    <style>
+        #slideshow-container{
+            margin: 10px auto;
+            width: 800px;
+            height: auto;
+            border: 5px solid white;
+            box-shadow: 0px 0px 10px black;
+            border-radius: 40px;
+        }
+        nav{
+            width: 800px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-left: 358px;
+            margin-top: 50px;
+        }
+        body{
+            height: 75vh;
+            width: auto;
+            background-color: powderblue;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="slideshow-container">
+        <a id="linkshow" href="http://www.google.com">
+            <img id="slideshow" width="800" height="400" src="./Jobsheet 2/LOGO.png">
+        </a>
+    </div>
+    
+    <nav>
+        <button id="prev"><< Prev</button>
+        <div>
+            <button id="start">Start Slideshow</button>
+            <button id="stop">Stop Slideshow</button>
+        </div>
+        <button id="next">Next >></button>
+    </nav>
+
+    <script>
+        let slideshowNode = document.getElementById("slideshow");
+        let linkshowNode = document.getElementById("linkshow");
+        let startNode = document.getElementById("start");
+        let stopNode = document.getElementById("stop");
+        let prevNode = document.getElementById("prev");
+        let nextNode = document.getElementById("next");
+
+        let arrayGabar = [
+        "./Wallpaper/15250.jpg", 
+        "./Wallpaper/15251.jpg", 
+        "./Wallpaper/15255.jpg", 
+        "./Wallpaper/15284.jpg", 
+        "./Wallpaper/559573.jpg"
+        ];
+
+        let arrayLink = [
+            "https://www.google.com/",
+            "https://www.twitter.com/",
+            "https://www.bing.com/",
+            "https://www.instagram.com/",
+            "https://www.facebook.com/"
+        ];
+
+        let counter = 0;
+        //tombol next
+        const nextSlideshow = () => {
+            counter++;
+            if(counter === 5){
+                counter = 0;
+            }
+            slideshowNode.setAttribute("src", arrayGabar[counter]);
+            linkshowNode.setAttribute("href", arrayLink[counter]);
+        }
+
+        nextNode.addEventListener("click", nextSlideshow);
+
+        //tombol prev
+        const prevSlideshow = () => {
+            counter--;
+            if(counter === -1){
+                counter = 4;
+            }
+            slideshowNode.setAttribute("src", arrayGabar[counter]);
+            linkshowNode.setAttribute("href", arrayLink[counter]);
+        }
+
+        prevNode.addEventListener("click", prevSlideshow);
+
+        //start
+        let intervalID = 0;
+        const startSlideshow = () =>{
+            if(intervalID === 0){
+                intervalID = setInterval(nextSlideshow, 2000);
+            }
+        }
+
+        startNode.addEventListener("click", startSlideshow);
+
+        const stopSlideshow = () =>{
+            clearInterval(intervalID);
+            intervalID=0;
+        }
+
+        stopNode.addEventListener("click", stopSlideshow);
+    </script>
+</body>
+</html>
